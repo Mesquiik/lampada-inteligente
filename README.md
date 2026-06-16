@@ -39,7 +39,7 @@ Sistema IoT de iluminação inteligente desenvolvido com ESP32-WROVER, capaz de 
 
 ---
 
-## 🔁 Lógica de funcionamento
+##  Lógica de funcionamento
 
 ```
 Botão pressionado → toggle liga/desliga (interrupção externa)
