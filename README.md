@@ -33,9 +33,9 @@ Sistema IoT de iluminação inteligente desenvolvido com ESP32-WROVER, capaz de 
 | LED RGB — Verde | 26 |
 | LED RGB — Azul | 27 |
 
->  GPIO 16 e 17 não estão disponíveis no ESP32-WROVER (reservados para PSRAM).  
->  Pinos analógicos em ADC1 (32, 34, 35) para compatibilidade com Wi-Fi ativo.
->  A depender da ESP32 utilizada, a pinagem pode mudar.
+>  GPIO 16 e 17 não estão disponíveis no ESP32-WROVER (reservados para PSRAM).
+
+>  Pinos analógicos em ADC1 (32, 34, 35) para compatibilidade com Wi-Fi ativo. A depender da ESP32 utilizada, a pinagem pode mudar.
 
 ---
 
