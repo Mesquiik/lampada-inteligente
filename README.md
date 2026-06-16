@@ -2,9 +2,11 @@
 
 Sistema IoT de iluminação inteligente desenvolvido com ESP32-WROVER, capaz de adaptar cor e brilho automaticamente com base em condições ambientais, e ser controlado remotamente via Arduino IoT Cloud.
 
+![Circuito](assets/circuito.jpg)
+
 ---
 
-## 🛠️ Hardware utilizado
+##  Hardware utilizado
 
 | Componente | Descrição |
 |---|---|
@@ -18,7 +20,7 @@ Sistema IoT de iluminação inteligente desenvolvido com ESP32-WROVER, capaz de 
 
 ---
 
-## 📌 Pinagem
+##  Pinagem
 
 | Componente | Pino GPIO |
 |---|---|
@@ -31,14 +33,47 @@ Sistema IoT de iluminação inteligente desenvolvido com ESP32-WROVER, capaz de 
 | LED RGB — Verde | 26 |
 | LED RGB — Azul | 27 |
 
-> ⚠️ GPIO 16 e 17 não estão disponíveis no ESP32-WROVER (reservados para PSRAM).  
-> ⚠️ Pinos analógicos em ADC1 (32, 34, 35) para compatibilidade com Wi-Fi ativo.
+>  GPIO 16 e 17 não estão disponíveis no ESP32-WROVER (reservados para PSRAM).  
+>  Pinos analógicos em ADC1 (32, 34, 35) para compatibilidade com Wi-Fi ativo.
+>  A depender da ESP32 utilizada, a pinagem pode mudar.
+---
+
+## 🔁 Lógica de funcionamento
+
+```
+Botão pressionado → toggle liga/desliga (interrupção externa)
+
+Temperatura > 25°C ou < 0°C:
+  → Serial: "Perigo! Desligar!"
+  → Buzzer liga
+  → LED desliga
+
+Ambiente claro (LDR alto):
+  → LED desliga automaticamente
+
+Ambiente escuro + temperatura OK:
+  → LED liga
+  → Cor definida pelo potenciômetro
+      Baixo       → Vermelho
+      Médio-baixo → Laranja
+      Médio       → Branco
+      Médio-alto  → Azul turquesa
+      Alto        → Azul
+```
+
+### LED apagando com a luz ambiente
+![LDR funcionando](assets/ldr.gif)
+
+### Cor variando com o potenciômetro
+![Potenciômetro funcionando](assets/pot.gif)
 
 ---
 
 ## ☁️ Arduino IoT Cloud
 
-### Variáveis
+### Variáveis criadas
+
+![Variáveis no Cloud](assets/variaveis.png)
 
 | Nome | Tipo | Permissão | Atualização |
 |---|---|---|---|
@@ -50,6 +85,8 @@ Sistema IoT de iluminação inteligente desenvolvido com ESP32-WROVER, capaz de 
 
 ### Dashboard
 
+![Dashboard](assets/dashboard.png)
+
 | Widget | Variável | Função |
 |---|---|---|
 | Messenger | `comando` | Envia comandos de texto |
@@ -60,9 +97,11 @@ Sistema IoT de iluminação inteligente desenvolvido com ESP32-WROVER, capaz de 
 
 ---
 
-## 🎮 Comandos disponíveis
+##  Comandos disponíveis
 
 Digite no widget **Messenger** do dashboard:
+
+![Comandos](assets/comandos.png)
 
 | Comando | Ação |
 |---|---|
@@ -80,7 +119,7 @@ Digite no widget **Messenger** do dashboard:
 
 ---
 
-## ⚙️ Como rodar o projeto
+##  Como rodar o projeto
 
 ### 1. Instalar as bibliotecas no Arduino IDE
 
@@ -110,4 +149,22 @@ Conecta o ESP32 via USB e clica em **Upload**.
 
 ---
 
-## 🔁 Lógica de funcionamento
+##  Estrutura do repositório
+
+```
+/
+├── lampada_inteligente.ino   # Firmware principal
+├── thingProperties.h         # Gerado pelo Arduino IoT Cloud
+├── arduino_secrets.h         # Credenciais (não versionado)
+├── .gitignore
+├── README.md
+└── assets/
+    ├── circuito.jpg
+    ├── dashboard.png
+    ├── variaveis.png
+    ├── comandos.png
+    ├── ldr.gif
+    └── pot.gif
+```
+
+
